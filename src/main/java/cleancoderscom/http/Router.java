@@ -13,7 +13,7 @@ public class Router {
     }
 
     public String route(ParsedRequest request) {
-        String[] parts = request.path.split("/");
+        String[] parts = request.parsedPath.path.split("/");
         String controllerKey = parts.length > 1 ? parts[1] : "";
         Controller controller = routes.get(controllerKey);
         if (controller == null) {

@@ -11,7 +11,7 @@ class RequestParserTest {
         RequestParser parser = new RequestParser();
         ParsedRequest r = parser.parse("");
         Assertions.assertEquals("", r.method);
-        Assertions.assertEquals("", r.path);
+        Assertions.assertEquals("", r.parsedPath.path);
     }
 
     @Test
@@ -19,7 +19,7 @@ class RequestParserTest {
         RequestParser parser = new RequestParser();
         ParsedRequest r = parser.parse(null);
         Assertions.assertEquals("", r.method);
-        Assertions.assertEquals("", r.path);
+        Assertions.assertEquals("", r.parsedPath.path);
     }
 
     @Test
@@ -27,7 +27,7 @@ class RequestParserTest {
         RequestParser parser = new RequestParser();
         ParsedRequest r = parser.parse("GET /foo/bar HTTP/1.1");
         Assertions.assertEquals("GET", r.method);
-        Assertions.assertEquals("/foo/bar", r.path);
+        Assertions.assertEquals("/foo/bar", r.parsedPath.path);
     }
 
     @Test
@@ -35,7 +35,7 @@ class RequestParserTest {
         RequestParser parser = new RequestParser();
         ParsedRequest r = parser.parse("GET");
         Assertions.assertEquals("GET", r.method);
-        Assertions.assertEquals("", r.path);
+        Assertions.assertEquals("", r.parsedPath.path);
     }
 
 }
