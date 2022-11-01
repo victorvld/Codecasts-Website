@@ -1,47 +1,46 @@
 package cleancoderscom.usecases.codecastDetails;
 
-import cleancoderscom.*;
-import cleancoderscom.entities.Codecast;
-import cleancoderscom.entities.User;
 import cleancoderscom.TestSetup;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+
+import static cleancoderscom.entities.License.LicenseType.VIEWING;
 
 class CodecastDetailsUsecaseTest {
-
-
-    private User user;
+    private CodecastDetailsUseCase useCase;
+    private CodecastDetailsOutputBoundarySpy presenter;
 
     @BeforeEach
     public void setUp() {
-        TestSetup.setupContext();
-        user = Context.userGateway.save(new User("User"));
+        TestSetup.setupSampleData();
+        useCase = new CodecastDetailsUseCase();
+        presenter = new CodecastDetailsOutputBoundarySpy();
     }
-
-    // Keep separated db IDs and permalinks, they are different things.
-    // TODO 27.10.2022. Get this passing.
-//    @Test
-//    void createCodecastDetailsPresentation() {
-//        Codecast codecast = new Codecast();
-//        codecast.setTitle("Codecast");
-//        codecast.setPermalink("permalink-a");
-//        codecast.setPublicationDate(LocalDate.of(2022, 2, 1));
-//        Context.codecastGateway.save(codecast);
-//        CodecastDetailsUseCase useCase = new CodecastDetailsUseCase();
-//        PresentableCodecastDetails details = useCase.requestCodecastDetails(user, "permalink-a");
-//
-//        Assertions.assertEquals("Codecast", details.title);
-//        Assertions.assertEquals("01.02.2022", details.publicationDate);
-//    }
 
     @Test
-    void doesntCrashOnMissingCodecast() {
-        CodecastDetailsUseCase useCase = new CodecastDetailsUseCase();
-        PresentableCodecastDetails details = useCase.requestCodecastDetails(user, "permalink-a");
+    void when_detailCodecastIsCalled_then_ResponseModelIsGeneratedProperly_and_forwarded_to_PresentMethod() {
+        CodecastDetailsRequest r = new CodecastDetailsRequest();
+        r.userName = "Bob";
+        r.permalink = "/episode/e1/show";
 
-        Assertions.assertEquals(false, details.wasFound);
+        useCase.detailCodecasts(r, presenter);
+
+        CodecastDetailsResponseModel responseModel = presenter.responseModel;
+        Assertions.assertNotNull(responseModel);
+        Assertions.assertEquals("/episode/e1/show", responseModel.permalink);
+        Assertions.assertEquals("Episode 1 - The Beginning", responseModel.title);
+        Assertions.assertEquals("Bob", responseModel.author);
+        Assertions.assertEquals(LocalDate.of(2022,11,19), responseModel.publicationDate);
+        Assertions.assertEquals(Duration.of(100, ChronoUnit.MINUTES), responseModel.duration);
+        Assertions.assertArrayEquals(List.of(VIEWING).toArray(), responseModel.licenseTypes.toArray());
     }
+
+    // TODO : Add more tests and continue testing the codecast details workflow, i.e., presenter and view.
+    // 1) Create CodecastDetailsPresenterTest
 }

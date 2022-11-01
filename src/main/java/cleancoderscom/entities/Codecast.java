@@ -1,5 +1,6 @@
 package cleancoderscom.entities;
 
+import java.time.Duration;
 import java.time.LocalDate;
 
 public class Codecast extends Entity {
@@ -7,6 +8,9 @@ public class Codecast extends Entity {
     //This is a string for know. We w ill change it later as it can be a problem.
     private LocalDate publicationDate = LocalDate.now();
     private String permalink;
+
+    private String author;
+    private Duration duration;
 
     public String getTitle() {
         return title;
@@ -33,5 +37,20 @@ public class Codecast extends Entity {
         this.permalink = permalink;
     }
 
+    public String getAuthor() {
+        return author;
+    }
 
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
 }
+

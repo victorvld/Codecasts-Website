@@ -1,13 +1,8 @@
 package cleancoderscom.usecases.codecastSummaries;
 
-import cleancoderscom.entities.Codecast;
-import cleancoderscom.entities.User;
 import cleancoderscom.usecases.codecastSummaries.CodecastSummariesViewModel.ViewableCodecastSummary;
 
 import java.time.format.DateTimeFormatter;
-
-import static cleancoderscom.entities.License.LicenseType.DOWNLOADING;
-import static cleancoderscom.entities.License.LicenseType.VIEWING;
 
 public class CodecastSummariesPresenter implements CodecastSummariesOutputBoundary{
 

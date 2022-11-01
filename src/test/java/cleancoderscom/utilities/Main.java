@@ -5,10 +5,11 @@ import cleancoderscom.http.RequestParser;
 import cleancoderscom.http.Router;
 import cleancoderscom.socketserver.SocketServer;
 import cleancoderscom.TestSetup;
+import cleancoderscom.usecases.codecastDetails.*;
 import cleancoderscom.usecases.codecastSummaries.CodecastSummariesController;
 import cleancoderscom.usecases.codecastSummaries.CodecastSummariesPresenter;
 import cleancoderscom.usecases.codecastSummaries.CodecastSummariesViewImpl;
-import cleancoderscom.usecases.codecastSummaries.CodecastSummaryUseCase;
+import cleancoderscom.usecases.codecastSummaries.CodecastSummariesUseCase;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,10 +25,12 @@ public class Main {
         Router router = new Router();
         CodecastSummariesViewImpl view = new CodecastSummariesViewImpl();
         CodecastSummariesPresenter presenter = new CodecastSummariesPresenter();
-        CodecastSummaryUseCase useCase = new CodecastSummaryUseCase();
+        CodecastSummariesUseCase useCase = new CodecastSummariesUseCase();
         router.addPath("", new CodecastSummariesController(useCase, presenter, view));
-        // TODO: 22/10/22 : Add this controller 
-        //router.addPath("", new CodecasrDetailsController);
+        CodecastDetailsViewImpl detailsView = new CodecastDetailsViewImpl();
+        CodecastDetailsPresenter detailsPresenter = new CodecastDetailsPresenter();
+        CodecastDetailsUseCase detailsUseCase = new CodecastDetailsUseCase();
+        router.addPath("episode", new CodecastDetailsController(detailsUseCase, detailsPresenter, detailsView));
 
         TestSetup.setupSampleData();
         SocketServer server = new SocketServer(s -> {

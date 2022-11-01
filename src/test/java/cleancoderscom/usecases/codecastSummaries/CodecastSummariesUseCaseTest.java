@@ -18,7 +18,7 @@ class CodecastSummariesUseCaseTest {
 
     private User user;
     private Codecast codecast;
-    private CodecastSummaryUseCase useCase;
+    private CodecastSummariesUseCase useCase;
     private CodecastSummariesOutputBoundarySpy presenterSpy;
 
     @BeforeEach
@@ -26,7 +26,7 @@ class CodecastSummariesUseCaseTest {
         TestSetup.setupContext();
         user = Context.userGateway.save(new User("User"));
         codecast = Context.codecastGateway.save(new Codecast());
-        useCase = new CodecastSummaryUseCase();
+        useCase = new CodecastSummariesUseCase();
         presenterSpy = new CodecastSummariesOutputBoundarySpy();
     }
 
@@ -92,6 +92,7 @@ class CodecastSummariesUseCaseTest {
     @Test
     public void presentedCodecastIsNotViewableIfNotLicense() {
         useCase.summarizeCodecasts(user, presenterSpy);
+
         CodecastSummary codecastSummaries = presenterSpy.responseModel.getCodecastSummaries().get(0);
         Assertions.assertFalse(codecastSummaries.isViewable);
     }
@@ -99,7 +100,9 @@ class CodecastSummariesUseCaseTest {
     @Test
     public void presentedCodecastIsViewableIfNotLicenseExists() {
         Context.licenseGateway.save(new License(VIEWING, user, codecast));
+
         useCase.summarizeCodecasts(user, presenterSpy);
+
         CodecastSummary codecastSummaries = presenterSpy.responseModel.getCodecastSummaries().get(0);
         Assertions.assertTrue(codecastSummaries.isViewable);
     }
@@ -108,7 +111,9 @@ class CodecastSummariesUseCaseTest {
     public void presentedCodecastIsDownloadableIfDownloadLicenseExists() {
         License downloadLicense = new License(DOWNLOADING, user, codecast);
         Context.licenseGateway.save(downloadLicense);
+
         useCase.summarizeCodecasts(user, presenterSpy);
+
         CodecastSummary summary = presenterSpy.responseModel.getCodecastSummaries().get(0);
         Assertions.assertTrue(summary.isDownloadable);
         Assertions.assertFalse(summary.isViewable);

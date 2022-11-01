@@ -7,7 +7,7 @@ import cleancoderscom.entities.User;
 
 import java.util.List;
 
-public class CodecastSummaryUseCase implements CodecastSummaryInputBoundary {
+public class CodecastSummariesUseCase implements CodecastSummariesInputBoundary {
 
     public static boolean isLicensedFor(License.LicenseType type, User user, Codecast codecast) {
         List<License> licenses = Context.licenseGateway.findLicensesForUserAndCodecast(user, codecast);

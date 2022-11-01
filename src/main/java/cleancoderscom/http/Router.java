@@ -13,13 +13,16 @@ public class Router {
     }
 
     public String route(ParsedRequest request) {
-        String[] parts = request.parsedPath.path.split("/");
-        String controllerKey = parts.length > 1 ? parts[1] : "";
+        String controllerKey = resolve(request.parsedPath);
         Controller controller = routes.get(controllerKey);
         if (controller == null) {
             return "HTTP/1.1 404 OK\n";
         } else {
             return controller.handle(request);
         }
+    }
+
+    private String resolve(RequestPath parsedPath) {
+        return parsedPath.dir;
     }
 }

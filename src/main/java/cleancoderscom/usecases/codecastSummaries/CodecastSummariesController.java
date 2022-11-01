@@ -6,11 +6,11 @@ import cleancoderscom.http.ParsedRequest;
 
 public class CodecastSummariesController implements Controller {
 
-    private CodecastSummaryInputBoundary useCase;
+    private CodecastSummariesInputBoundary useCase;
     private CodecastSummariesOutputBoundary presenter;
     private CodecastSummariesView view;
 
-    public CodecastSummariesController(CodecastSummaryInputBoundary useCase,
+    public CodecastSummariesController(CodecastSummariesInputBoundary useCase,
                                        CodecastSummariesOutputBoundary presenter,
                                        CodecastSummariesView view) {
         this.useCase = useCase;

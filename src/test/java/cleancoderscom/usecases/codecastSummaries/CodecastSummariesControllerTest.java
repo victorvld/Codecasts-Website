@@ -28,17 +28,14 @@ class CodecastSummariesControllerTest {
     void testInputBoundaryInvocation() {
         ParsedRequest request = new ParsedRequest("GET", "blah");
 
+        //The controller should use a factory to create the use case.
+        // The controller is gonna get control from the webserver first, from a router.
+        // We invoke the controller there, and then the controller need to create the use case.
         controller.handle(request);
 
         Assertions.assertTrue(useCaseSpy.summarizeCodecastWasCalled);
         Assertions.assertTrue(Context.userGateway.findUser("Bob").isSame(useCaseSpy.requestedUser));
         Assertions.assertSame(presenterSpy, useCaseSpy.outputBoundary);
-
-        //The controller should use a factory to create the use case.
-        // The controller is gonna get control from the webserver first, from a router.
-        // We invoke the controller there, and then the controller need to create the use case.
-
-        //List<PresentableCodecastSummaries> summaries = new ArrayList<>();
     }
 
     @Test

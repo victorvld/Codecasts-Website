@@ -27,7 +27,7 @@ public class CodeCastPresentation {
     public static List<CodecastSummariesViewModel.ViewableCodecastSummary> loadViewableCodecast() {
         User loggedInUser = gateKeeper.getLoggedInUser();
         CodecastSummariesOutputBoundary presenter = new CodecastSummariesPresenter();
-        new CodecastSummaryUseCase().summarizeCodecasts(loggedInUser, presenter);
+        new CodecastSummariesUseCase().summarizeCodecasts(loggedInUser, presenter);
         List<CodecastSummariesViewModel.ViewableCodecastSummary> viewableCodecasts = presenter.getViewModel().getViewableCodecasts();
         return viewableCodecasts;
     }
@@ -60,7 +60,7 @@ public class CodeCastPresentation {
         Codecast codecast = Context.codecastGateway.findCodecastByTitle(codecastTitle);
         License license = new License(type, user, codecast);
         Context.licenseGateway.save(license);
-        return CodecastSummaryUseCase.isLicensedFor(type, user, codecast);
+        return CodecastSummariesUseCase.isLicensedFor(type, user, codecast);
     }
 
     public String presentationUser() {
