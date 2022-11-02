@@ -33,7 +33,7 @@ class CodecastDetailsControllerTest {
 
         Assertions.assertTrue(useCaseSpy.detailCodecastWasCalled);
         Assertions.assertEquals("Bob", useCaseSpy.request.userName);
-        Assertions.assertEquals("/episode/e1/show", useCaseSpy.request.permalink);
+        Assertions.assertEquals("e1", useCaseSpy.request.permalink);
         Assertions.assertSame(presenterSpy, useCaseSpy.outputBoundary);
     }
 

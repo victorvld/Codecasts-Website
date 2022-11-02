@@ -5,10 +5,12 @@ import cleancoderscom.entities.Codecast;
 import cleancoderscom.entities.License;
 import cleancoderscom.entities.User;
 import cleancoderscom.TestSetup;
+import cleancoderscom.usecases.Request;
 import cleancoderscom.usecases.codecastSummaries.*;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static cleancoderscom.entities.License.LicenseType.DOWNLOADING;
@@ -25,9 +27,8 @@ public class CodeCastPresentation {
     }
 
     public static List<CodecastSummariesViewModel.ViewableCodecastSummary> loadViewableCodecast() {
-        User loggedInUser = gateKeeper.getLoggedInUser();
-        CodecastSummariesOutputBoundary presenter = new CodecastSummariesPresenter();
-        new CodecastSummariesUseCase().summarizeCodecasts(loggedInUser, presenter);
+        CodecastSummariesOutputBoundary presenter = new CodecastSummariesPresenter(new CodecastSummariesViewImpl());
+        new CodecastSummariesUseCase(presenter).execute(null);
         List<CodecastSummariesViewModel.ViewableCodecastSummary> viewableCodecasts = presenter.getViewModel().getViewableCodecasts();
         return viewableCodecasts;
     }

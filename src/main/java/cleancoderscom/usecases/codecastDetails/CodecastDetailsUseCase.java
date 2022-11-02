@@ -4,6 +4,8 @@ import cleancoderscom.Context;
 import cleancoderscom.entities.Codecast;
 import cleancoderscom.entities.License;
 import cleancoderscom.entities.User;
+import cleancoderscom.usecases.Request;
+import cleancoderscom.usecases.UseCase;
 
 public class CodecastDetailsUseCase implements CodecastDetailsInputBoundary{
     @Override

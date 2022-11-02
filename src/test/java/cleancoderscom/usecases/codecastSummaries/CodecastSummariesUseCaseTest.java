@@ -25,20 +25,21 @@ class CodecastSummariesUseCaseTest {
     public void setup() {
         TestSetup.setupContext();
         user = Context.userGateway.save(new User("User"));
+        Context.gateKeeper.setLoggedInUser(user);
         codecast = Context.codecastGateway.save(new Codecast());
-        useCase = new CodecastSummariesUseCase();
         presenterSpy = new CodecastSummariesOutputBoundarySpy();
+        useCase = new CodecastSummariesUseCase(presenterSpy);
+
     }
 
     @Test
     void useCaseWiring() {
-
-        CodecastSummariesOutputBoundarySpy presenterSpy = new CodecastSummariesOutputBoundarySpy();
-        useCase.summarizeCodecasts(user, presenterSpy);
-        Assertions.assertNotNull(presenterSpy.responseModel);
         // useCase make the response model.
-        // send reponse model to presenter.
+        // send response model to presenter.
         // assert sth about response model in the presenter.
+        useCase.execute(null);
+        Assertions.assertNotNull(presenterSpy.responseModel);
+
 
     }
     @Test
@@ -65,7 +66,7 @@ class CodecastSummariesUseCaseTest {
     public void presentingNoCodecasts() {
         // This is awful we will fix that by using a hierarchical context
         Context.codecastGateway.delete(codecast);
-        useCase.summarizeCodecasts(user, presenterSpy);
+        useCase.execute(null);
 
         Assertions.assertEquals(0, presenterSpy.responseModel.getCodecastSummaries().size());
     }
@@ -76,8 +77,7 @@ class CodecastSummariesUseCaseTest {
         codecast.setPublicationDate(LocalDate.of(2022, 10,17));
         codecast.setPermalink("permalink");
         Context.codecastGateway.save(codecast);
-
-        useCase.summarizeCodecasts(user, presenterSpy);
+        useCase.execute(null);
 
         Assertions.assertEquals(1, presenterSpy.responseModel.getCodecastSummaries().size());
         CodecastSummary codecastSummary  = presenterSpy.responseModel.getCodecastSummaries().get(0);
@@ -91,7 +91,7 @@ class CodecastSummariesUseCaseTest {
 
     @Test
     public void presentedCodecastIsNotViewableIfNotLicense() {
-        useCase.summarizeCodecasts(user, presenterSpy);
+        useCase.execute(null);
 
         CodecastSummary codecastSummaries = presenterSpy.responseModel.getCodecastSummaries().get(0);
         Assertions.assertFalse(codecastSummaries.isViewable);
@@ -101,7 +101,7 @@ class CodecastSummariesUseCaseTest {
     public void presentedCodecastIsViewableIfNotLicenseExists() {
         Context.licenseGateway.save(new License(VIEWING, user, codecast));
 
-        useCase.summarizeCodecasts(user, presenterSpy);
+        useCase.execute(null);
 
         CodecastSummary codecastSummaries = presenterSpy.responseModel.getCodecastSummaries().get(0);
         Assertions.assertTrue(codecastSummaries.isViewable);
@@ -112,7 +112,7 @@ class CodecastSummariesUseCaseTest {
         License downloadLicense = new License(DOWNLOADING, user, codecast);
         Context.licenseGateway.save(downloadLicense);
 
-        useCase.summarizeCodecasts(user, presenterSpy);
+        useCase.execute(null);
 
         CodecastSummary summary = presenterSpy.responseModel.getCodecastSummaries().get(0);
         Assertions.assertTrue(summary.isDownloadable);

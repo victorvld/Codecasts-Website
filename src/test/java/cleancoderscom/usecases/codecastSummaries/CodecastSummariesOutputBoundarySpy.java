@@ -10,7 +10,8 @@ public class CodecastSummariesOutputBoundarySpy implements CodecastSummariesOutp
     }
 
     @Override
-    public void present(CodecastSummariesResponseModel responseModel) {
+    public String present(CodecastSummariesResponseModel responseModel) {
         this.responseModel = responseModel;
+        return "TILT";
     }
 }

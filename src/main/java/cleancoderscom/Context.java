@@ -4,6 +4,8 @@ import cleancoderscom.gateways.CodeCastGateway;
 import cleancoderscom.gateways.LicenseGateway;
 import cleancoderscom.gateways.UserGateway;
 
+import java.net.Socket;
+
 public class Context {
 
     //This is a global and a singleton

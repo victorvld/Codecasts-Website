@@ -27,13 +27,13 @@ class CodecastDetailsUsecaseTest {
     void when_detailCodecastIsCalled_then_ResponseModelIsGeneratedProperly_and_forwarded_to_PresentMethod() {
         CodecastDetailsRequest r = new CodecastDetailsRequest();
         r.userName = "Bob";
-        r.permalink = "/episode/e1/show";
+        r.permalink = "e1";
 
         useCase.detailCodecasts(r, presenter);
 
         CodecastDetailsResponseModel responseModel = presenter.responseModel;
         Assertions.assertNotNull(responseModel);
-        Assertions.assertEquals("/episode/e1/show", responseModel.permalink);
+        Assertions.assertEquals("e1", responseModel.permalink);
         Assertions.assertEquals("Episode 1 - The Beginning", responseModel.title);
         Assertions.assertEquals("Bob", responseModel.author);
         Assertions.assertEquals(LocalDate.of(2022,11,19), responseModel.publicationDate);

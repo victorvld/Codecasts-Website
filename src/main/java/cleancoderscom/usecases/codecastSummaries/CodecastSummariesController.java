@@ -1,26 +1,21 @@
 package cleancoderscom.usecases.codecastSummaries;
 
-import cleancoderscom.Context;
 import cleancoderscom.http.Controller;
 import cleancoderscom.http.ParsedRequest;
+import cleancoderscom.usecases.UseCase;
+import cleancoderscom.usecases.UseCaseFactory;
 
 public class CodecastSummariesController implements Controller {
 
-    private CodecastSummariesInputBoundary useCase;
-    private CodecastSummariesOutputBoundary presenter;
-    private CodecastSummariesView view;
+    private UseCase useCase;
 
-    public CodecastSummariesController(CodecastSummariesInputBoundary useCase,
-                                       CodecastSummariesOutputBoundary presenter,
-                                       CodecastSummariesView view) {
-        this.useCase = useCase;
-        this.presenter = presenter;
-        this.view = view;
+    public CodecastSummariesController(UseCaseFactory factory) {
+        this.useCase = factory.make("CodecastSummaries");
     }
 
     @Override
     public String handle(ParsedRequest request) {
-        useCase.summarizeCodecasts(Context.gateKeeper.getLoggedInUser(), presenter);
-        return view.generateView(presenter.getViewModel());
+        return useCase.execute(null);
     }
+
 }
