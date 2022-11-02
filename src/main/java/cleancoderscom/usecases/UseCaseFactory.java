@@ -1,5 +1,5 @@
 package cleancoderscom.usecases;
 
 public interface UseCaseFactory {
-    UseCase make(String codecastSummaries);
+    UseCase make(String useCaseName);
 }

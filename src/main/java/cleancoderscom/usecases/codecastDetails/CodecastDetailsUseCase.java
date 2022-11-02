@@ -7,12 +7,20 @@ import cleancoderscom.entities.User;
 import cleancoderscom.usecases.Request;
 import cleancoderscom.usecases.UseCase;
 
-public class CodecastDetailsUseCase implements CodecastDetailsInputBoundary{
+public class CodecastDetailsUseCase implements UseCase {
+
+    private CodecastDetailsOutputBoundary presenter;
+
+    public CodecastDetailsUseCase(CodecastDetailsOutputBoundary presenter) {
+        this.presenter = presenter;
+    }
+
     @Override
-    public void detailCodecasts(CodecastDetailsRequest request, CodecastDetailsOutputBoundary presenter) {
+    public String execute(Request request) {
+        DetailsRequest detailsRequest = (DetailsRequest) request;
         User loggedInUser = Context.gateKeeper.getLoggedInUser();
         CodecastDetailsResponseModel responseModel = new CodecastDetailsResponseModel();
-        Codecast codecast = Context.codecastGateway.findCodecastByPermalink(request.permalink);
+        Codecast codecast = Context.codecastGateway.findCodecastByPermalink(detailsRequest.permalink);
         responseModel.permalink = codecast.getPermalink();
         responseModel.title = codecast.getTitle();
         responseModel.author = codecast.getAuthor();
@@ -20,7 +28,7 @@ public class CodecastDetailsUseCase implements CodecastDetailsInputBoundary{
         responseModel.duration = codecast.getDuration();
         responseModel.licenseTypes = Context.licenseGateway.findLicensesForUserAndCodecast(loggedInUser, codecast)
                 .stream().map(License::getLicenseType).toList();
-        presenter.present(responseModel);
+        return presenter.present(responseModel);
     }
 }
 

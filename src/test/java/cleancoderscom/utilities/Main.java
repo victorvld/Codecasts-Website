@@ -5,14 +5,12 @@ import cleancoderscom.http.ParsedRequest;
 import cleancoderscom.http.RequestParser;
 import cleancoderscom.http.Router;
 import cleancoderscom.socketserver.SocketServer;
+import cleancoderscom.usecases.RequestBuilder;
 import cleancoderscom.usecases.UseCaseFactory;
 import cleancoderscom.usecases.UseCaseFactoryImpl;
 import cleancoderscom.usecases.codecastDetails.CodecastDetailsController;
-import cleancoderscom.usecases.codecastDetails.CodecastDetailsPresenter;
-import cleancoderscom.usecases.codecastDetails.CodecastDetailsUseCase;
-import cleancoderscom.usecases.codecastDetails.CodecastDetailsViewImpl;
+import cleancoderscom.usecases.codecastDetails.CodecastDetailsRequestBuilder;
 import cleancoderscom.usecases.codecastSummaries.CodecastSummariesController;
-import cleancoderscom.usecases.codecastSummaries.CodecastSummariesViewImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,18 +23,13 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception {
+        TestSetup.setupSampleData();
         Router router = new Router();
-        CodecastSummariesViewImpl view = new CodecastSummariesViewImpl();
-        //CodecastSummariesPresenter presenter = new CodecastSummariesPresenter();
-        //CodecastSummariesUseCase useCase = new CodecastSummariesUseCase();
         UseCaseFactory factory = new UseCaseFactoryImpl();
         router.addPath("", new CodecastSummariesController(factory));
-        CodecastDetailsViewImpl detailsView = new CodecastDetailsViewImpl();
-        CodecastDetailsPresenter detailsPresenter = new CodecastDetailsPresenter();
-        CodecastDetailsUseCase detailsUseCase = new CodecastDetailsUseCase();
-        router.addPath("episode", new CodecastDetailsController(detailsUseCase, detailsPresenter, detailsView));
+        RequestBuilder builder = new CodecastDetailsRequestBuilder();
+        router.addPath("episode", new CodecastDetailsController(factory, builder));
 
-        TestSetup.setupSampleData();
         SocketServer server = new SocketServer(s -> {
             try {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(s.getInputStream()));

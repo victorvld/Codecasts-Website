@@ -10,7 +10,8 @@ public class CodecastDetailsOutputBoundarySpy implements CodecastDetailsOutputBo
     }
 
     @Override
-    public void present(CodecastDetailsResponseModel responseModel) {
+    public String present(CodecastDetailsResponseModel responseModel) {
         this.responseModel = responseModel;
+        return "TILT";
     }
 }

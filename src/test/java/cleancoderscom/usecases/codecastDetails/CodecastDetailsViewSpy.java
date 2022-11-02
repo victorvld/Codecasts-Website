@@ -1,6 +1,6 @@
 package cleancoderscom.usecases.codecastDetails;
 
-public class CodecastDetailsViewSpy implements  CodecastDetailsView{
+public class CodecastDetailsViewSpy implements CodecastDetailsView {
     public boolean generateViewWasCalled;
     public CodecastDetailsViewModel viewModel;
 

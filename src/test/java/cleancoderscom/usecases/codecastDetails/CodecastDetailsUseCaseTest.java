@@ -12,24 +12,23 @@ import java.util.List;
 
 import static cleancoderscom.entities.License.LicenseType.VIEWING;
 
-class CodecastDetailsUsecaseTest {
+class CodecastDetailsUseCaseTest {
     private CodecastDetailsUseCase useCase;
     private CodecastDetailsOutputBoundarySpy presenter;
 
     @BeforeEach
     public void setUp() {
         TestSetup.setupSampleData();
-        useCase = new CodecastDetailsUseCase();
-        presenter = new CodecastDetailsOutputBoundarySpy();
+        this.presenter = new CodecastDetailsOutputBoundarySpy();
+        this.useCase = new CodecastDetailsUseCase(this.presenter);
     }
 
     @Test
     void when_detailCodecastIsCalled_then_ResponseModelIsGeneratedProperly_and_forwarded_to_PresentMethod() {
-        CodecastDetailsRequest r = new CodecastDetailsRequest();
-        r.userName = "Bob";
-        r.permalink = "e1";
+        DetailsRequest request = new DetailsRequest();
+        request.permalink = "e1";
 
-        useCase.detailCodecasts(r, presenter);
+        this.useCase.execute(request);
 
         CodecastDetailsResponseModel responseModel = presenter.responseModel;
         Assertions.assertNotNull(responseModel);

@@ -21,7 +21,8 @@ class CodecastDetailsPresenterTest {
         rm.author = "Benito";
         rm.licenseTypes = List.of(License.LicenseType.VIEWING);
         rm.duration = Duration.of(100, ChronoUnit.MINUTES);
-        CodecastDetailsPresenter presenter = new CodecastDetailsPresenter();
+        CodecastDetailsViewSpy view = new CodecastDetailsViewSpy();
+        CodecastDetailsPresenter presenter = new CodecastDetailsPresenter(view);
 
         presenter.present(rm);
 

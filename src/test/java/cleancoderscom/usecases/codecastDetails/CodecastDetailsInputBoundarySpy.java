@@ -1,14 +1,17 @@
 package cleancoderscom.usecases.codecastDetails;
 
-public class CodecastDetailsInputBoundarySpy implements CodecastDetailsInputBoundary {
+import cleancoderscom.usecases.Request;
+import cleancoderscom.usecases.UseCase;
+
+public class CodecastDetailsInputBoundarySpy implements UseCase {
     public boolean detailCodecastWasCalled;
     public CodecastDetailsOutputBoundary outputBoundary;
-    public CodecastDetailsRequest request;
+    public DetailsRequest request;
 
     @Override
-    public void detailCodecasts(CodecastDetailsRequest request, CodecastDetailsOutputBoundary presenter) {
-        this.request = request;
+    public String execute(Request request) {
+        this.request = (DetailsRequest) request;
         this.detailCodecastWasCalled = true;
-        this.outputBoundary = presenter;
+        return "TILT";
     }
 }

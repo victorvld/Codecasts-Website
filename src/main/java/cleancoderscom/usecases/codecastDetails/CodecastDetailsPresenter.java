@@ -4,7 +4,12 @@ import java.time.format.DateTimeFormatter;
 
 public class CodecastDetailsPresenter implements CodecastDetailsOutputBoundary {
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    private final CodecastDetailsView view;
     private CodecastDetailsViewModel viewModel;
+
+    public CodecastDetailsPresenter(CodecastDetailsView view) {
+        this.view = view;
+    }
 
     @Override
     public CodecastDetailsViewModel getViewModel() {
@@ -12,8 +17,9 @@ public class CodecastDetailsPresenter implements CodecastDetailsOutputBoundary {
     }
 
     @Override
-    public void present(CodecastDetailsResponseModel responseModel) {
+    public String present(CodecastDetailsResponseModel responseModel) {
         makeViewable(responseModel);
+        return view.generateView(viewModel);
     }
 
     private void makeViewable(CodecastDetailsResponseModel responseModel) {
