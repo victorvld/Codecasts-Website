@@ -1,17 +1,35 @@
 // TODO:
 
-0) Make it work.
-1) Implement a factory to create the use cases.
-2) Implement a builder to create the requests.
-3) Separate in different Jars(Maven modules each Component
-   1) Controllers
+0) Make it work. DONE.
+1) Implement a factory to create the use cases. DONE.
+2) Implement a builder to create the requests. DONE.
+3) Think of Passing the Request to the handle controller method directly. NOT POSSIBLE.
+4) Separate in different Jars(Maven modules each Component final request and do not do any transformation inside.
+   1) Controllers by use case.
    2) Requestors, i.e, Factories, Builders, Request Interface.
    3) Interactors, i.e, Use Cases implementations, builder implementations, factories implementations, response implementation.
    4) Responders, i.e, Response Interface, OutputBoundary Interface.
    5) Database Gateways
    6) Database Implementations, i.e, Database Gateways
    7) Entities
-   EP:14 - Open Close Principle - T=17:30 
+
+// TODO 2:
+
+1) Remove dependency on Router in Controller modules.
+   1) Send Request Instead of ParsedRequest.
+   2) Move Controller Interface to the Requester module.
+2) Remove dependency Context in ControllerDetails module.
+3) Create an interface for the CodecastDetailsResponseModel datastructure.
+4) Create an interface for the CodecastSummaryResponseModel datastructure.
+   1) Remove the circular dependency.
+5) Recreate all the test cases.
+6) Find a better solution to the TestSetup, RequestBuilderSpy and UseCaseFactorySpy.
+EP:14 - Open Close Principle - T=17:30 
+
+// TODO Inmediatelly:
+
+1) remove module cycle.
+
 
 Here is explained how to use factories, builders and interfaces
 to decoupled the controller from the use cases and requests.

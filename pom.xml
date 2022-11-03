@@ -4,9 +4,29 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>es.victorvld</groupId>
+    <groupId>cleancoderscom</groupId>
     <artifactId>CleanCodeWebsite</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>SummariesController</module>
+        <module>DetailsController</module>
+        <module>Requestor</module>
+        <module>SummariesResponder</module>
+        <module>DetailsResponder</module>
+        <module>DetailsView</module>
+        <module>SummariesView</module>
+        <module>SummariesInteractor</module>
+        <module>DetailsInteractor</module>
+        <module>Entities</module>
+        <module>DatabaseGateways</module>
+        <module>DatabaseImpls</module>
+        <module>Utilities</module>
+        <module>Router</module>
+        <module>SocketServer</module>
+        <module>AplicationContext</module>
+        <module>Main</module>
+    </modules>
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
