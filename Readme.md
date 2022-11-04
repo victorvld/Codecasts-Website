@@ -1,75 +1,86 @@
-STORY 1
+# Codecasts-Website
 
-0) Make it work. DONE.
-1) Implement a factory to create the use cases. DONE.
-2) Implement a builder to create the requests. DONE.
+This project is the continuation of the Clean Code Case Study episodes by Uncle Bob. Customizing and Taking further his development.
 
-STORY 2
+The aim of my project is to drive the original code into a solid design in which the projects will be able to evolve according the S.O.L.I.D principles and the clean Architecture. In particular, I seek to be able to achieve the next points:
 
-4) Separate in different Jars(Maven modules each Component final request and do not do any transformation inside. DONE.
-   1) Controllers by use case.
-   2) Requestors, i.e, Factories, Builders, Request Interface.
-   3) Interactors, i.e, Use Cases implementations, builder implementations, factories implementations, response implementation.
-   4) Responders, i.e, Response Interface, OutputBoundary Interface.
-      1) Create an interface for the CodecastSummaryResponseModel datastructure.
-      2) Create an interface for the CodecastDetailsResponseModel datastructure.
-   5) Views by use case.
-   6) Database Gateways
-   7) Database Implementations, i.e, Database Gateways implementations.
-   8) Entities
-   9) Router
-   10) SocketService
-   11) Utilities
-   12) Main
-   13) Application Context
+- Improve the original design: Add Factories, Builders and Adapters. Follow the S.O.L.I.D components design, i.e, Controllers, Requestor, Responders, Interactors, Entities, Views, Database Gateways and Database implementations are split into maven modules aligned. This way all the depencies are under control and cross the boundaries in the appropiate direction.
 
-5) remove remaining circular dependencies. DONE.
+- Move to the main module all the factory, startegy and builder implementations as well as the adapters. Making easy the Application configuration from a potential configuration file path passed as argument to the Main method of the application.
 
-STORY 3
+- Be able to add new use cases easily by following the design, i.e, creating new classes and derivatives, without modifiying the existing use cases.
 
-Investigate how to get UCL diagrams from every module maven module and from the classes in a module. 
-
-The best tools seems to be Diagrams, it is available in IntelliJ Ultimate version.
-
-6) Remove dependency Context in ControllerDetails module. DONE.
+- Plug in a real database.
 
 
-STORY 4
+### STORY 1
 
-Investigate how to read/parse a HTTP request.
+- Make it work.
+- Implement a factory to create the use cases.
+- Implement a builder to create the requests.
 
-It was difficult to find a library to do this. 
-What I found out is Servet Applications take care of this. Once you configure them by extending one of your classes,
-they will provide you an HTTPServletRequest object, from which you can extract cookies, headers, path and method.
+### STORY 2
 
-There are some well know Servlets frameworks such us Apache Tomcat, Netty and Jetty.
+- Separate in different Jars(Maven modules each Component final request and do not do any transformation inside. DONE.
+  - Controllers by use case.
+  - Requestors, i.e, Factories, Builders, Request Interface.
+  - Interactors, i.e, Use Cases implementations, builder implementations, factories implementations, response implementation.
+  - Responders, i.e, Response Interface, OutputBoundary Interface.
+    - Create an interface for the CodecastSummaryResponseModel datastructure.
+    - Create an interface for the CodecastDetailsResponseModel datastructure.
+  - Views by use case.
+  - Database Gateways
+  - Database Implementations, i.e, Database Gateways implementations.
+  - Entities
+  - Router
+  - SocketService
+  - Utilities
+  - Main
+  - Application Context
 
-For the time being, I am using my custom Socket. So I will create my own HTTP parser for this one.
+- remove remaining circular dependencies.
 
-STORY 5
+### STORY 3
 
-7) Remove dependency on Router in Controller modules. DONE.
-    1) Send Request Instead of ParsedRequest.
-    2) Move Controller Interface to the Requester module.
-8) Clean Main, i.e, create a SocketService implementation for the current web service. DONE.
-9) Create Adapter to translate the incoming Request to our system domain, i.e, ParserRequest -> Request Interface. DONE.
-10) Create Parser Interface. DONE.
-11) Create Controller module. DONE.
-    1) remove router dependency from each controller use case.
-12) Remove builder param from each controller constructor. DONE.
+- Investigate how to get UCL diagrams from every module maven module and from the classes in a module. 
+  - The best tools seems to be Diagrams, it is available in IntelliJ Ultimate version.
 
-STORY 6 
+- Remove dependency Context in ControllerDetails module. DONE.
 
-13) Recreate all the test cases
 
-14) Find a better solution to the TestSetup, RequestBuilderSpy and UseCaseFactorySpy.
+### STORY 4
 
-15) Define properly the strategy pattern for the parser, and the adapter pattern for the adapters.
+- Investigate how to read/parse a HTTP request.
 
-STORY 7
+  - It was difficult to find a library to do this. What I found out is Servet Applications take care of this. Once you configure them by extending one of your classes, they will provide you an HTTPServletRequest object, from which you can extract cookies, headers, path and method. 
+  - There are some well know Servlets frameworks such us Apache Tomcat, Netty and Jetty. 
+  - For the time being, I am using my custom Socket. So I will create my own HTTP parser for this one.
 
-15) Change HTMLs and create my own ones.
+### STORY 5
 
-STORY 8
+- Remove dependency on Router in Controller modules. DONE.
+  - Send Request Instead of ParsedRequest.
+  - Move Controller Interface to the Requester module.
+- Clean Main, i.e, create a SocketService implementation for the current web service. DONE.
+- Create Adapter to translate the incoming Request to our system domain, i.e, ParserRequest -> Request Interface. DONE.
+- Create Parser Interface. DONE.
+- Create Controller module. DONE.
+  - remove router dependency from each controller use case.
+- Remove builder param from each controller constructor. DONE.
 
-16) Upload project to a remote repository in my Github, and make it open source.
+### STORY 6 
+
+- Recreate all the test cases
+
+- Find a better solution to the TestSetup, RequestBuilderSpy and UseCaseFactorySpy.
+
+- Define properly the strategy pattern for the parser, and the adapter pattern for the adapters.
+
+### STORY 7
+
+- Change HTMLs and create to simplify the website.
+- Change the packages ids.
+
+### STORY 8
+
+- Upload project to a remote repository in my Github, and make it open source.
