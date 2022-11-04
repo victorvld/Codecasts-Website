@@ -1,8 +1,8 @@
-package cleancoderscom.http;
+package cleancoderscom.parser;
 
 public class ParsedRequest {
 
-    public RequestPath parsedPath = new RequestPath("");
+    public Path path = new Path("");
     public String method = "";
 
     public ParsedRequest() {
@@ -10,7 +10,7 @@ public class ParsedRequest {
 
     public ParsedRequest(String method, String path) {
         this.method = method;
-        this.parsedPath = new RequestPathParser().parse(path);
+        this.path = new PathParser().parse(path);
     }
 
 

@@ -26,6 +26,8 @@
         <module>SocketServer</module>
         <module>AplicationContext</module>
         <module>Main</module>
+        <module>Parser</module>
+        <module>Controller</module>
     </modules>
     <dependencies>
         <dependency>

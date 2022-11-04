@@ -46,14 +46,24 @@ public class TestSetup {
         e2.setAuthor("Cervantes");
         e2.setDuration(Duration.of(200, ChronoUnit.MINUTES));
 
+        Codecast e3 = new Codecast();
+        e3.setTitle("Episode 3 - The End");
+        e3.setPublicationDate(LocalDate.of(2022, 12, 7));
+        e3.setPermalink("e3");
+        e3.setAuthor("Delibes");
+        e3.setDuration(Duration.of(37, ChronoUnit.MINUTES));
+
         Context.codecastGateway.save(e1);
         Context.codecastGateway.save(e2);
+        Context.codecastGateway.save(e3);
 
         License bobE1 = new License(VIEWING, bob, e1);
         License bobE2 = new License(VIEWING, bob, e2);
+        License bobE3 = new License(VIEWING, bob, e3);
 
         Context.licenseGateway.save(bobE1);
         Context.licenseGateway.save(bobE2);
+        Context.licenseGateway.save(bobE3);
 
         Context.gateKeeper.setLoggedInUser(bob);
     }

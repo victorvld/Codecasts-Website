@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CodecastSummariesUseCase implements UseCase {
 
-    private CodecastSummariesOutputBoundary presenter;
+    private final CodecastSummariesOutputBoundary presenter;
 
     public CodecastSummariesUseCase(CodecastSummariesOutputBoundary presenter) {
         this.presenter = presenter;
@@ -40,7 +40,7 @@ public class CodecastSummariesUseCase implements UseCase {
 
     @Override
     public String execute(Request request) {
-        User loggedInUser = Context.gateKeeper.getLoggedInUser();
+        User loggedInUser = Context.userGateway.findUser(((SummariesRequest) request).userName);
         CodecastSummariesResponseModel responseModel = new CodecastSummariesResponseModel();
         List<Codecast> allCodecast = Context.codecastGateway.findAllCodecastSortedChronologically();
         for (Codecast codecast : allCodecast) {

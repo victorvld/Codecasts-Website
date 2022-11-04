@@ -1,4 +1,4 @@
-package cleancoders;
+package cleancoders.implementations;
 
 import cleancoderscom.summaries.view.CodecastSummariesPresenter;
 import cleancoderscom.summaries.view.CodecastSummariesViewImpl;

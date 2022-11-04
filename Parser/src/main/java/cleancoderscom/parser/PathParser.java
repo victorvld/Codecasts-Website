@@ -1,8 +1,8 @@
-package cleancoderscom.http;
+package cleancoderscom.parser;
 
-public class RequestPathParser {
-    public RequestPath parse(String path) {
-        RequestPath requestPath = new RequestPath(path);
+public class PathParser {
+    public Path parse(String path) {
+        Path requestPath = new Path(path);
         String[] parts = path.split("/");
         if (parts.length > 1) {
             requestPath.dir = parts[1];

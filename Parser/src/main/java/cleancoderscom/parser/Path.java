@@ -1,12 +1,12 @@
-package cleancoderscom.http;
+package cleancoderscom.parser;
 
-public class RequestPath {
-    public String path = "";
+public class Path {
+    public String path;
     public String dir = "";
     public String value = "";
     public String action = "";
 
-    public RequestPath(String path) {
+    public Path(String path) {
         this.path = path;
     }
 }

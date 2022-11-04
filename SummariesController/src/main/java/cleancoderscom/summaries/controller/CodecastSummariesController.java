@@ -1,8 +1,8 @@
 package cleancoderscom.summaries.controller;
 
+import cleancoderscom.controller.Controller;
 import cleancoderscom.requestor.factory.UseCaseFactory;
-import cleancoderscom.http.Controller;
-import cleancoderscom.http.ParsedRequest;
+import cleancoderscom.requestor.request.Request;
 import cleancoderscom.requestor.usecase.UseCase;
 
 public class CodecastSummariesController implements Controller {
@@ -14,8 +14,8 @@ public class CodecastSummariesController implements Controller {
     }
 
     @Override
-    public String handle(ParsedRequest request) {
-        return useCase.execute(null);
+    public String handle(Request request) {
+        return useCase.execute(request);
     }
 
 }

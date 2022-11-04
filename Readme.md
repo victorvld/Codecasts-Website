@@ -1,105 +1,72 @@
-// TODO:
+STORY 1
 
 0) Make it work. DONE.
 1) Implement a factory to create the use cases. DONE.
 2) Implement a builder to create the requests. DONE.
-3) Think of Passing the Request to the handle controller method directly. NOT POSSIBLE.
-4) Separate in different Jars(Maven modules each Component final request and do not do any transformation inside.
+
+STORY 2
+
+4) Separate in different Jars(Maven modules each Component final request and do not do any transformation inside. DONE.
    1) Controllers by use case.
    2) Requestors, i.e, Factories, Builders, Request Interface.
    3) Interactors, i.e, Use Cases implementations, builder implementations, factories implementations, response implementation.
    4) Responders, i.e, Response Interface, OutputBoundary Interface.
-   5) Database Gateways
-   6) Database Implementations, i.e, Database Gateways
-   7) Entities
+      1) Create an interface for the CodecastSummaryResponseModel datastructure.
+      2) Create an interface for the CodecastDetailsResponseModel datastructure.
+   5) Views by use case.
+   6) Database Gateways
+   7) Database Implementations, i.e, Database Gateways implementations.
+   8) Entities
+   9) Router
+   10) SocketService
+   11) Utilities
+   12) Main
+   13) Application Context
 
-// TODO 2:
+5) remove remaining circular dependencies. DONE.
 
-1) Remove dependency on Router in Controller modules.
-   1) Send Request Instead of ParsedRequest.
-   2) Move Controller Interface to the Requester module.
-2) Remove dependency Context in ControllerDetails module.
-3) Create an interface for the CodecastDetailsResponseModel datastructure.
-4) Create an interface for the CodecastSummaryResponseModel datastructure.
-   1) Remove the circular dependency.
-5) Recreate all the test cases.
-6) Find a better solution to the TestSetup, RequestBuilderSpy and UseCaseFactorySpy.
-EP:14 - Open Close Principle - T=17:30 
+STORY 3
 
-// TODO Inmediatelly:
+Investigate how to get UCL diagrams from every module maven module and from the classes in a module. 
 
-1) remove module cycle.
+The best tools seems to be Diagrams, it is available in IntelliJ Ultimate version.
+
+6) Remove dependency Context in ControllerDetails module. DONE.
 
 
-Here is explained how to use factories, builders and interfaces
-to decoupled the controller from the use cases and requests.
+STORY 4
 
-When the controller has detected that it suppose to create an 
-hourly employee. Then it creates the 
-request data-structure, it gets the hourly employee use-case,
-and then it passes that data-structure into the use case. Calling the execute method.
+Investigate how to read/parse a HTTP request.
 
-Image 1
+It was difficult to find a library to do this. 
+What I found out is Servet Applications take care of this. Once you configure them by extending one of your classes,
+they will provide you an HTTPServletRequest object, from which you can extract cookies, headers, path and method.
 
-That controller depends on the details of 
-the data-structure and the details of the use case.
+There are some well know Servlets frameworks such us Apache Tomcat, Netty and Jetty.
 
-If I attempt to extend that data-structure or that use-case,
-I will have to recompile and redeploy the controller.
+For the time being, I am using my custom Socket. So I will create my own HTTP parser for this one.
 
-We can fix this by decoupling the data-structures and the use-cases from the controller.
-By using builders, factories and interfaces.
+STORY 5
 
-Image 2
+7) Remove dependency on Router in Controller modules. DONE.
+    1) Send Request Instead of ParsedRequest.
+    2) Move Controller Interface to the Requester module.
+8) Clean Main, i.e, create a SocketService implementation for the current web service. DONE.
+9) Create Adapter to translate the incoming Request to our system domain, i.e, ParserRequest -> Request Interface. DONE.
+10) Create Parser Interface. DONE.
+11) Create Controller module. DONE.
+    1) remove router dependency from each controller use case.
+12) Remove builder param from each controller constructor. DONE.
 
-For example, we can create the Builder interface.
-And in this interface we can put methods that build each
-individual data-structure. 
+STORY 6 
 
-The implementation of that interface will actually do the building.
-And it will return those data-structures under the degenerate type request.
+13) Recreate all the test cases
+14) Find a better solution to the TestSetup, RequestBuilderSpy and UseCaseFactorySpy.
 
-The use-case factory interface has methods in it to create every possible use case. 
-The implementation of that interface would create those use-cases,
-but it would return them as the interface use-case.
-The use-case interface and the request data-type, a degenerate data-type,
-will be both use by the controller that execute the use case. 
+STORY 7
 
-This way we have decoupled the request and use cases from the controller.
-As long as the changes don't change the signature of the methods at the request builder. 
-The controller will remain unaffected.
+15) Change HTMLs and create my own ones.
 
-The same for the use cases, 
-we can do changes on the uses cases and those changes won't affect to the controller
-as long as we don't change the signature of the methods on the use case factory.
-The controller will remain unaffected. 
+STORY 8
 
-There is only one RequestBuilder and only one UseCaseFactory in the system.
-
-But what about adding a new use case. This will make use to change, the RequestBuilder and the UseCaseFactory interface.
-Because we will have to add a new method to ech one.
-
-This is a violation of the ISP.
-
-We can solve this problem by using a dynamic language like ruby or 
-By using a dynamic interface for the request builder and the use case factory.
-(by breaking type safety in static languages).
-
-Image 3
-
-For the request builder, the string will contain the identity of the 
-data structure to build. And the hashmap will contain all the construction arguments.
-
-This means we lose type safety. We can fix the type safety by adding a basilian interfaces.
-
-Image 4
-
-Another important point, is not to make the base class Employee depend on
-particular things from its derivative. To avoid that we have to downcast again to the derivative,
-this is not a problem since we know which derivative to cast.
-
-Imagine 5
-
-The wrong approach will be this:
-
-Image 6, 7 and 8
+16) Upload project to a remote repository in my Github, and make it open source.

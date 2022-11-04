@@ -9,17 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>SummariesController</artifactId>
+    <artifactId>Controller</artifactId>
     <dependencies>
         <dependency>
             <groupId>cleancoderscom</groupId>
             <artifactId>Requestor</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>cleancoderscom</groupId>
-            <artifactId>Router</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

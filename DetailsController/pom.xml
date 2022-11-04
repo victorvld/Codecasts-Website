@@ -13,19 +13,13 @@
     <dependencies>
         <dependency>
             <groupId>cleancoderscom</groupId>
-            <artifactId>Router</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>cleancoderscom</groupId>
-            <artifactId>AplicationContext</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>cleancoderscom</groupId>
             <artifactId>Requestor</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>cleancoderscom</groupId>
+            <artifactId>Controller</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
