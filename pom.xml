@@ -9,15 +9,15 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>SummariesController</module>
-        <module>DetailsController</module>
+        <module>UseCases/CodecastSummaries/SummariesController</module>
+        <module>UseCases/CodecastDetails//DetailsController</module>
         <module>Requestor</module>
-        <module>SummariesResponder</module>
-        <module>DetailsResponder</module>
-        <module>DetailsView</module>
-        <module>SummariesView</module>
-        <module>SummariesInteractor</module>
-        <module>DetailsInteractor</module>
+        <module>UseCases/CodecastSummaries/SummariesResponder</module>
+        <module>UseCases/CodecastDetails/DetailsResponder</module>
+        <module>UseCases/CodecastDetails/DetailsView</module>
+        <module>UseCases/CodecastSummaries/SummariesView</module>
+        <module>UseCases/CodecastSummaries/SummariesInteractor</module>
+        <module>UseCases/CodecastDetails/DetailsInteractor</module>
         <module>Entities</module>
         <module>DatabaseGateways</module>
         <module>DatabaseImpls</module>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Clean Coders</title>
+</head>
+<body>
+<div id="faux-background"></div>
+<header id="top-header">
+    <div class="container">
+        <div id="hamburger"><a href="#" id="hamburger-button">&#9776;</a></div>
+        <div class="hidden" id="navbar"><a class="current link" href="/" id="navlink">videos</a><a href="/cart"
+                                                                                                   id="navlink">cart</a>
+            <div id="login-link"><a href="/viewer/signin" id="navlink">login / sign-up</a></div>
+        </div>
+    </div>
+</header>
+<div id="primary-content">
+    <div id="toppest">
+        <div class="welcome">
+            <div class="container main-welcome">
+                <div class="stuff">
+                    <div class="tagline"><span class="subtitle">Training Videos.</span></div>
+                    <a class="button hero-button" href="/#videos" id="jump-to-videos">See All Videos</a></div>
+            </div>
+        </div>
+        <div class="container"><a name="videos"></a>
+
+            <div class="tabbar clearfix">
+                <div><a class="tab" href="#" id="clean-code-series-button"><span class="category-single-title">Clean Code <span
+                        class="icon-chevron-down"></span></span></a><a class="tab" href="/category/component-design#videos"><span
+
+                        class="category-single-title">Component Design</span></a><a class="tab subtab"
+                                                                                    href="/category/advanced-tdd#videos"><span
+                        class="category-single-title">Advanced TDD</span></a><a class="tab subtab"
+                                                                                href="/category/design-patterns#videos"><span
+                        class="category-single-title">Design Patterns</span></a></div>
+            </div>
+        </div>
+    </div>
+    <div id="toppest-placeholder"></div>
+    <div class="container" id="videos">
+        <div>
+            <div id="video-section-header"><h2>All Episodes</h2>
+
+                <div class="frontcap">
+                    <div class="buyall"><a class="button" href="/cart/quick-add/all" id="buy-bulk-button">Add all to
+                        cart</a></div>
+                </div>
+            </div>
+            <div class="videos" data-order="asc">
+                ${codecasts}
+            </div>
+            <div class="clearfix" id="sidebar">
+                <div class="cart box"><h2 class="title"><span class="header-icon icon-shopping-cart"></span> Cart
+                    Preview</h2>
+
+                    <div class="section"><p class="empty">Your cart is empty!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

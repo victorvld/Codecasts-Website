@@ -20,7 +20,6 @@ public class CodecastSummariesViewImpl implements CodecastSummariesView {
                 codecastTemplate.replace("permalink", summary.permalink);
 
                 //staged
-                codecastTemplate.replace("thumbnail", "https://avatars.githubusercontent.com/u/12075?s=48&v=4");
                 codecastTemplate.replace("author", "Arranz");
                 codecastTemplate.replace("duration", "50 min.");
                 codecastTemplate.replace("contentActions", "Buying Options go here");

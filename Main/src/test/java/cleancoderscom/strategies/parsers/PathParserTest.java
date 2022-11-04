@@ -1,4 +1,4 @@
-package cleancoderscom.strategies;
+package cleancoderscom.strategies.parsers;
 
 import cleancoderscom.parser.Path;
 import cleancoderscom.strategies.SimpleRequestParser.PathParser;

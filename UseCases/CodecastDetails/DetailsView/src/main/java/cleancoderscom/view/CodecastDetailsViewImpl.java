@@ -12,7 +12,6 @@ public class CodecastDetailsViewImpl implements CodecastDetailsView {
             codecastTemplate.replace("permalink", details.permalink);
 
             //staged
-            codecastTemplate.replace("thumbnail", "https://avatars.githubusercontent.com/u/12075?s=48&v=4");
             codecastTemplate.replace("author", details.author);
             codecastTemplate.replace("duration", details.duration);
             codecastTemplate.replace("contentActions", "Buying Options go here");
