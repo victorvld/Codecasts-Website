@@ -61,7 +61,10 @@ STORY 5
 STORY 6 
 
 13) Recreate all the test cases
+
 14) Find a better solution to the TestSetup, RequestBuilderSpy and UseCaseFactorySpy.
+
+15) Define properly the strategy pattern for the parser, and the adapter pattern for the adapters.
 
 STORY 7
 

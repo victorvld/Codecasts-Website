@@ -31,12 +31,6 @@
             <groupId>cleancoderscom</groupId>
             <artifactId>DatabaseImpls</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>cleancoderscom</groupId>
-            <artifactId>DatabaseImpls</artifactId>
-            <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
